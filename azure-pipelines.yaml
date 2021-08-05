@@ -1,0 +1,38 @@
+# NOTE: Azure Pipelines does not support multi-dimensional matrix ...
+
+strategy:
+  matrix:
+    # macOS x86-64
+    'macos-x86_64, aarch64-zephyr-elf':
+      host: x86_64-apple-darwin
+      build: macos-10.15
+      target: 'aarch64-zephyr-elf'
+      config: arm64
+    'macos-x86_64, nios2-zephyr-elf':
+      host: x86_64-apple-darwin
+      build: macos-10.15
+      target: 'nios2-zephyr-elf'
+      config: nios2
+    'macos-x86_64, sparc-zephyr-elf':
+      host: x86_64-apple-darwin
+      build: macos-10.15
+      target: 'sparc-zephyr-elf'
+      config: sparc
+
+pool:
+  vmImage: $(build)
+
+steps:
+  - script: |
+      echo "$(host) - $(target)"
+      uname -a
+    displayName: 'Print out information'
+
+  - script: |
+      brew install autoconf automake bash binutils boost gawk gnu-sed \
+           gnu-tar help2man ncurses pkg-config
+    displayName: 'Install dependencies'
+
+  - script: |
+      ./go.sh $(config)
+    displayName: 'Build $(target) for $(host)'
