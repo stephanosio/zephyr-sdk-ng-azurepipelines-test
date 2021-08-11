@@ -1,103 +1,107 @@
 # NOTE: Azure Pipelines does not support multi-dimensional matrix ...
 
-strategy:
-  matrix:
-    # macOS x86-64
-    'macos-x86_64, aarch64-zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: aarch64-zephyr-elf
-      config: arm64
-    'macos-x86_64, arc64-zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: arc64-zephyr-elf
-      config: arc64
-    'macos-x86_64, arc-zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: arc-zephyr-elf
-      config: arc
-    'macos-x86_64, arm-zephyr-eabi':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: arm-zephyr-eabi
-      config: arm
-    'macos-x86_64, mips-zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: mips-zephyr-elf
-      config: mips
-    'macos-x86_64, nios2-zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: nios2-zephyr-elf
-      config: nios2
-    'macos-x86_64, riscv64-zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: riscv64-zephyr-elf
-      config: riscv64
-    'macos-x86_64, sparc-zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: sparc-zephyr-elf
-      config: sparc
-    'macos-x86_64, x86_64-zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: x86_64-zephyr-elf
-      config: x86_64-zephyr-elf
-    'macos-x86_64, xtensa-intel_apl_adsp_zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: xtensa-intel_apl_adsp_zephyr-elf
-      config: xtensa_intel_apl_adsp
-    'macos-x86_64, xtensa-intel_bdw_adsp_zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: xtensa-intel_bdw_adsp_zephyr-elf
-      config: xtensa_intel_bdw_adsp
-    'macos-x86_64, xtensa-intel_byt_adsp_zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: xtensa-intel_byt_adsp_zephyr-elf
-      config: xtensa_intel_byt_adsp
-    'macos-x86_64, xtensa-intel_s1000_zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: xtensa-intel_s1000_zephyr-elf
-      config: xtensa_intel_s1000
-    'macos-x86_64, xtensa-nxp_imx_adsp_zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: xtensa-nxp_imx_adsp_zephyr-elf
-      config: xtensa_nxp_imx_adsp
-    'macos-x86_64, xtensa-nxp_imx8m_adsp_zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: xtensa-nxp_imx8m_adsp_zephyr-elf
-      config: xtensa_nxp_imx8m_adsp
-    'macos-x86_64, xtensa-sample_controller_zephyr-elf':
-      host: x86_64-apple-darwin
-      build: macos-10.15
-      target: xtensa-sample_controller_zephyr-elf
-      config: xtensa_sample_controller
+jobs:
+  - job: toolchain
+    timeoutInMinutes: 360
 
-pool:
-  vmImage: $(build)
+    strategy:
+      matrix:
+        # macOS x86-64
+        'macos-x86_64, aarch64-zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: aarch64-zephyr-elf
+          config: arm64
+        'macos-x86_64, arc64-zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: arc64-zephyr-elf
+          config: arc64
+        'macos-x86_64, arc-zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: arc-zephyr-elf
+          config: arc
+        'macos-x86_64, arm-zephyr-eabi':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: arm-zephyr-eabi
+          config: arm
+        'macos-x86_64, mips-zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: mips-zephyr-elf
+          config: mips
+        'macos-x86_64, nios2-zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: nios2-zephyr-elf
+          config: nios2
+        'macos-x86_64, riscv64-zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: riscv64-zephyr-elf
+          config: riscv64
+        'macos-x86_64, sparc-zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: sparc-zephyr-elf
+          config: sparc
+        'macos-x86_64, x86_64-zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: x86_64-zephyr-elf
+          config: x86_64-zephyr-elf
+        'macos-x86_64, xtensa-intel_apl_adsp_zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: xtensa-intel_apl_adsp_zephyr-elf
+          config: xtensa_intel_apl_adsp
+        'macos-x86_64, xtensa-intel_bdw_adsp_zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: xtensa-intel_bdw_adsp_zephyr-elf
+          config: xtensa_intel_bdw_adsp
+        'macos-x86_64, xtensa-intel_byt_adsp_zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: xtensa-intel_byt_adsp_zephyr-elf
+          config: xtensa_intel_byt_adsp
+        'macos-x86_64, xtensa-intel_s1000_zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: xtensa-intel_s1000_zephyr-elf
+          config: xtensa_intel_s1000
+        'macos-x86_64, xtensa-nxp_imx_adsp_zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: xtensa-nxp_imx_adsp_zephyr-elf
+          config: xtensa_nxp_imx_adsp
+        'macos-x86_64, xtensa-nxp_imx8m_adsp_zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: xtensa-nxp_imx8m_adsp_zephyr-elf
+          config: xtensa_nxp_imx8m_adsp
+        'macos-x86_64, xtensa-sample_controller_zephyr-elf':
+          host: x86_64-apple-darwin
+          build: macos-10.15
+          target: xtensa-sample_controller_zephyr-elf
+          config: xtensa_sample_controller
 
-steps:
-  - script: |
-      echo "$(host) - $(target)"
-      uname -a
-    displayName: 'Print out information'
+    pool:
+      vmImage: $(build)
 
-  - script: |
-      brew install autoconf automake bash binutils boost gawk gnu-sed \
-           gnu-tar help2man ncurses pkg-config
-    displayName: 'Install dependencies'
+    steps:
+      - script: |
+          echo "$(host) - $(target)"
+          uname -a
+        displayName: 'Print out information'
 
-  - script: |
-      ./go.sh $(config)
-    displayName: 'Build $(target) for $(host)'
+      - script: |
+          brew install autoconf automake bash binutils boost gawk gnu-sed \
+              gnu-tar help2man ncurses pkg-config
+        displayName: 'Install dependencies'
+
+      - script: |
+          ./go.sh $(config)
+        displayName: 'Build $(target) for $(host)'
