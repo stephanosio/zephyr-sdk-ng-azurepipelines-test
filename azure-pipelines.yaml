@@ -12,11 +12,11 @@ jobs:
           build: macos-10.15
           target: aarch64-zephyr-elf
           config: arm64
-        'macos-x86_64, arc64-zephyr-elf':
-          host: x86_64-apple-darwin
-          build: macos-10.15
-          target: arc64-zephyr-elf
-          config: arc64
+        # 'macos-x86_64, arc64-zephyr-elf':
+        #   host: x86_64-apple-darwin
+        #   build: macos-10.15
+        #   target: arc64-zephyr-elf
+        #   config: arc64
         'macos-x86_64, arc-zephyr-elf':
           host: x86_64-apple-darwin
           build: macos-10.15
@@ -105,3 +105,15 @@ jobs:
       - script: |
           ./go.sh $(config)
         displayName: 'Build $(target) for $(host)'
+
+      - task: PublishBuildArtifacts@1
+        displayName: Upload build log
+        inputs:
+          pathToPublish: /Volumes/CrossToolNGNew/build/output/build.$(config).macos.x86_64.log.bz2
+          artifactName: build-$(host).$(target).log.bz2
+
+      - task: PublishBuildArtifacts@1
+        displayName: Upload tarball
+        inputs:
+          pathToPublish: $(config).macos.x86_64.tar.bz2
+          artifactName: toolchain-$(host).$(target).tar.bz2
